@@ -1,92 +1,162 @@
 # CertifyMe Full Stack Assessment
 
-## Tech Stack
+## Project Overview
 
-- Flask (Backend)
-- SQLite (Database)
-- HTML/CSS/JS (Frontend)
+This project is a Full Stack Admin Portal developed as part of the CertifyMe Full Stack Intern Technical Assessment.
+The application provides secure admin authentication and opportunity management with complete backend implementation using Flask and SQLite.
 
-## Features
+---
 
-- Admin Signup & Login
-- Forgot Password (token-based)
+# Tech Stack
+
+## Backend
+
+- Python
+- Flask
+- SQLite
+
+## Frontend
+
+- HTML
+- CSS
+- JavaScript
+
+---
+
+# Features
+
+## Authentication
+
+- Admin Signup
+- Admin Login
+- Forgot Password (Token-based Reset)
 - Session-based Authentication
-- Create, View, Edit, Delete Opportunities
-- Data Persistence
-- User-specific Data Isolation
+- Secure Logout
 
-## API Endpoints
+## Opportunity Management
 
-### Auth APIs
+- Create Opportunities
+- View Opportunities
+- Edit Opportunities
+- Delete Opportunities
 
-- `POST /api/auth/signup` - Create admin account (requires email validation, 8+ char password)
-- `POST /api/auth/login` - Login with email & password
-- `POST /api/auth/forgot-password` - Request password reset (token expires in 1 hour)
-- `GET /api/auth/me` - Get current logged-in admin info
-- `POST /api/auth/logout` - Logout
+## Security & Validation
 
-### Opportunity APIs (Authenticated)
+- Email format validation
+- Minimum password length validation
+- Session authentication
+- User-specific data isolation
+- Password reset token expiry (1 hour)
 
-- `GET /api/opportunities` - List all opportunities for logged-in admin
-- `GET /api/opportunities/<id>` - Get single opportunity by ID
-- `POST /api/opportunities` - Create new opportunity
-- `PUT /api/opportunities/<id>` - Update existing opportunity
-- `DELETE /api/opportunities/<id>` - Delete opportunity
+---
 
-## Backend Implementation Status ✅
+# API Endpoints
 
-All required endpoints implemented with proper:
+## Authentication APIs
 
-- ✅ HTTP methods (GET, POST, PUT, DELETE)
-- ✅ Status codes (200, 201, 400, 401, 404, 409)
-- ✅ JSON responses
-- ✅ Authentication validation
-- ✅ Data isolation (each admin sees only their data)
-- ✅ Email format validation
-- ✅ Password minimum length (8 characters)
-- ✅ Password reset tokens with 1-hour expiry
-- ✅ CORS support for session-based auth
+| Method | Endpoint                    | Description                   |
+| ------ | --------------------------- | ----------------------------- |
+| POST   | `/api/auth/signup`          | Register new admin            |
+| POST   | `/api/auth/login`           | Login admin                   |
+| POST   | `/api/auth/forgot-password` | Generate password reset token |
+| GET    | `/api/auth/me`              | Get logged-in admin details   |
+| POST   | `/api/auth/logout`          | Logout admin                  |
 
-See `BACKEND_FIXES_EXPLAINED.md` for detailed explanation of all fixes.
+---
 
-## How to Run
+## Opportunity APIs (Authenticated)
 
-### Easy Method (Batch Files)
+| Method | Endpoint                  | Description            |
+| ------ | ------------------------- | ---------------------- |
+| GET    | `/api/opportunities`      | Get all opportunities  |
+| GET    | `/api/opportunities/<id>` | Get single opportunity |
+| POST   | `/api/opportunities`      | Create opportunity     |
+| PUT    | `/api/opportunities/<id>` | Update opportunity     |
+| DELETE | `/api/opportunities/<id>` | Delete opportunity     |
 
-**Option 1: Double-click the batch files**
+---
 
-1. Double-click `run-backend.bat` (starts backend on http://127.0.0.1:5000)
-2. Double-click `run-frontend.bat` in another window (starts frontend on http://localhost:8000)
-3. Open browser to **http://localhost:8000**
+# Backend Implementation Status
 
-### Manual Method (Command Line)
+Implemented with:
 
-#### Backend (Terminal 1)
+- Proper REST API structure
+- HTTP status codes
+- JSON responses
+- Authentication validation
+- Data persistence using SQLite
+- User-specific access control
+- CORS support for frontend integration
 
-```powershell
+---
+
+# Project Structure
+
+```bash
+admin-portal-main/
+│
+├── backend/
+│   ├── app.py
+│   ├── requirements.txt
+│   └── app.db
+│
+├── frontend/
+│   ├── admin.html
+│   ├── admin.css
+│   └── admin.js
+│
+├── README.md
+└── test_api.py
+```
+
+---
+
+# Setup Instructions
+
+## 1. Backend Setup
+
+```bash
 cd backend
-C:\Users\AKASH\AppData\Local\Programs\Python\Python313\python.exe -m pip install -r requirements.txt
-C:\Users\AKASH\AppData\Local\Programs\Python\Python313\python.exe app.py
+pip install -r requirements.txt
+python app.py
 ```
 
-The backend will start on **http://127.0.0.1:5000**
+Backend runs on:
 
-#### Frontend (Terminal 2)
+```text
+http://127.0.0.1:5000
+```
 
-```powershell
+---
+
+## 2. Frontend Setup
+
+Open a new terminal:
+
+```bash
 cd frontend
-C:\Users\AKASH\AppData\Local\Programs\Python\Python313\python.exe -m http.server 8000
+python -m http.server 8000
 ```
 
-Open in browser: **http://localhost:8000**
+Frontend runs on:
 
-## Database
+```text
+http://localhost:8000
+```
 
-- SQLite is used
-- Database is created automatically when the backend runs
+---
 
-## Notes
+# Database
 
-- No UI changes were made as per instructions
-- All data is stored in the database (no hardcoded data)
+- SQLite database is used
+- Database is created automatically on first run
+- All application data is stored persistently
+
+---
+
+# Notes
+
+- No UI modifications were made as per assessment instructions
+- All features are fully functional
 - Each admin can only access their own opportunities
+- Backend APIs are properly secured and validated
